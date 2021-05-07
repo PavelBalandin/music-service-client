@@ -5,11 +5,6 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/about',
-        name: 'About',
-        component: () => import('../views/About.vue')
-    },
-    {
         path: '/login',
         name: 'login',
         meta: {layout: 'empty'},
@@ -22,10 +17,52 @@ const routes = [
         component: () => import('../views/Register.vue')
     },
     {
-        path: '/categories',
-        name: 'categories',
+        path: '/about',
+        name: 'About',
+        component: () => import('../views/About.vue')
+    },
+    {
+        path: '/',
+        name: 'home',
         meta: {layout: 'main'},
-        component: () => import('../views/Categories.vue')
+        component: () => import('../views/Home.vue')
+    },
+    {
+        path: '/search',
+        name: 'search',
+        meta: {layout: 'main'},
+        component: () => import('../views/Search.vue')
+    },
+    {
+        path: '/playlists',
+        name: 'playlists',
+        meta: {layout: 'main'},
+        component: () => import('../views/Playlists.vue')
+    },
+    {
+        path: '/artists',
+        name: 'artists',
+        meta: {layout: 'main'},
+        component: () => import('../views/Artists.vue')
+
+    },
+    {
+        path: '/genres',
+        name: 'genres',
+        meta: {layout: 'main'},
+        component: () => import('../views/Genres.vue')
+    },
+    {
+        path: '/album',
+        name: 'album',
+        meta: {layout: 'main'},
+        component: () => import('../views/Album.vue')
+    },
+    {
+        path: '/artist',
+        name: 'artist',
+        meta: {layout: 'main'},
+        component: () => import('../views/Artists.vue')
     }
 ]
 
