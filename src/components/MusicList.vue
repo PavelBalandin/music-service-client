@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .musicList {
-  height: calc(100vh - 160px);
+  height: calc(100vh - 196px);
   margin: 16px 0;
   padding: 0 32px;
   overflow-y: scroll;
