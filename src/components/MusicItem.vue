@@ -5,10 +5,10 @@
       <img v-bind:src=img alt="">
       <div id="title_artist">
         <div id="title">{{ music.name }}</div>
-        <a id="artist" href="/">{{ music.artist }}</a>
+        <a v-for="artist in music.artists" id="artist" href="/">{{ artist.name }}</a>
       </div>
     </div>
-    <div id="album">{{ music.album }}</div>
+    <a id="album" href="">{{ music.album.name }}</a>
     <div id="date">{{ music.created_at }}</div>
     <div id="time">3:08</div>
   </div>
@@ -74,6 +74,7 @@ img {
 #artist {
   font-size: 14px;
   color: #a0a0a0;
+  margin-right: 12px;
 }
 
 #artist:hover {
@@ -87,7 +88,13 @@ img {
 
 #album {
   display: flex;
+  color: #a0a0a0;
   width: 30%;
+}
+
+#album:hover {
+  transition: 0.3s;
+  text-decoration: underline;
 }
 
 #date {
