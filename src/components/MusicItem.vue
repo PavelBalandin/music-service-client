@@ -40,6 +40,7 @@ export default {
 </script>
 
 <style scoped>
+
 .music {
   display: flex;
   flex-direction: row;
@@ -49,6 +50,7 @@ export default {
   align-items: center;
   font-family: 'Roboto', sans-serif;
   border-radius: 4px;
+  line-height: normal;
 }
 
 img {

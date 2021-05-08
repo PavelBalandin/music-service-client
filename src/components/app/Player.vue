@@ -112,18 +112,21 @@ export default {
   watch: {
     volume() {
       this.volume_update()
-    },
-    is_play() {
-      console.log(this.is_play);
-      this.seek = audio_player.audio.currentTime;
-      let updateSeek
-      if (this.is_play) {
-        updateSeek = setInterval(() => {
-          this.seek = audio_player.audio.currentTime;
-        }, 500)
-      }
     }
+  },
+  mounted() {
+    setInterval(() => {
+      if (audio_player.audio !== null) {
+        this.seek = audio_player.audio.currentTime;
+        this.max_seek = audio_player.audio.duration;
 
+        if (audio_player.state == true) {
+          this.icon_play_pause = IMG.PAUSE;
+        } else {
+          this.icon_play_pause = IMG.PLAY;
+        }
+      }
+    }, 100)
   }
 
 
