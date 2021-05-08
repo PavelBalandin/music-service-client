@@ -43,7 +43,8 @@ export default {
       icon_next: IMG.NEXT,
       seek: 0,
       max_seek: 0,
-      is_play: false
+      is_play: false,
+      interval: null
     }
   },
   methods: {
@@ -115,18 +116,21 @@ export default {
     }
   },
   mounted() {
-    setInterval(() => {
+    this.interval = setInterval(() => {
       if (audio_player.audio !== null) {
         this.seek = audio_player.audio.currentTime;
         this.max_seek = audio_player.audio.duration;
 
-        if (audio_player.state == true) {
+        if (audio_player.state === true) {
           this.icon_play_pause = IMG.PAUSE;
         } else {
           this.icon_play_pause = IMG.PLAY;
         }
       }
     }, 100)
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
   }
 
 
