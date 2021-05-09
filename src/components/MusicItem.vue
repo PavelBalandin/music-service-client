@@ -10,11 +10,13 @@
     </div>
     <a id="album" href="">{{ music.album.name }}</a>
     <div id="date">{{ music.created_at }}</div>
-    <div id="time">3:08</div>
+    <div id="time">----</div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "MusicItem",
   props: {
@@ -26,7 +28,7 @@ export default {
   data() {
     return {
       artist: "",
-      img: "http://localhost:8080/image/s26im1.jpg"
+      img: "http://localhost:8080/image/" + this.music.image.name,
     }
   },
   methods: {
@@ -53,9 +55,11 @@ export default {
   line-height: normal;
 }
 
-img {
+#info img {
   width: 40px;
   height: 40px;
+  object-fit: cover;
+  object-position: 0 0;
 }
 
 #index {
@@ -118,4 +122,6 @@ img {
 .music:not(:hover) {
   transition: 0.3s;
 }
+
+
 </style>

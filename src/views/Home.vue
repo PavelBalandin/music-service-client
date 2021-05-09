@@ -4,6 +4,7 @@
 
 <script>
 import MusicList from "../components/MusicList";
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -14,10 +15,13 @@ export default {
     }
   },
   async mounted() {
-    const res = await fetch('http://localhost:8080/api/v1/compositions?pageSize=20');
-    const musicList = await res.json();
+    const res = await axios.get('http://localhost:8080/api/v1/compositions?pageSize=20',{
+      headers:{
+        Authorization: 'Bearer_' + localStorage.getItem('token')
+      }
+    });
+    const musicList = res.data;
     this.musicList = musicList;
-    console.log(musicList);
     audio_player.musicList.fromArray(musicList);
   },
 }
