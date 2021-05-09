@@ -4,7 +4,9 @@
       <div class="navbar-left">
         <a href="/">RMX</a>
       </div>
-
+      <div>
+        {{ username }}
+      </div>
       <ul class="right hide-on-small-and-down">
         <li>
           <a class="dropdown-trigger white-text"
@@ -34,6 +36,11 @@
 <script>
 export default {
   name: "Navbar",
+  data() {
+    return {
+      username: localStorage.getItem('username')
+    }
+  },
   methods: {
     logout() {
       this.$router.push('login?message=logout')

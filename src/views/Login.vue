@@ -56,6 +56,8 @@ export default {
         password: this.password
       });
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('id', response.data.id);
+      localStorage.setItem('username', response.data.username);
       if (response.status === 200) {
         this.$router.push('/');
       }
