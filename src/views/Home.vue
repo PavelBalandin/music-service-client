@@ -15,8 +15,8 @@ export default {
     }
   },
   async mounted() {
-    const res = await axios.get('http://localhost:8080/api/v1/compositions?pageSize=20',{
-      headers:{
+    const res = await axios.get('http://localhost:8080/api/v1/compositions?pageSize=20', {
+      headers: {
         Authorization: 'Bearer_' + localStorage.getItem('token')
       }
     });
