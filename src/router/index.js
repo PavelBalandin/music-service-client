@@ -62,8 +62,15 @@ const routes = [
         path: '/artist',
         name: 'artist',
         meta: {layout: 'main'},
-        component: () => import('../views/Artists.vue')
+        component: () => import('../views/single/Artist.vue')
+    },
+    {
+        path: '/playlist',
+        name: 'playlist',
+        meta: {layout: 'main'},
+        component: () => import('../views/single/Playlist.vue')
     }
+
 ]
 
 const router = new VueRouter({

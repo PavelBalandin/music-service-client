@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/" class="music">
+  <router-link v-bind:to=to class="music">
     <div id="index">{{ index }}</div>
     <div id="info">
       <img v-bind:src=img alt="">
@@ -8,7 +8,7 @@
       </div>
     </div>
     <a id="album" href=""></a>
-    <div id="date">{{ playlist.created}}</div>
+    <div id="date">{{ playlist.created }}</div>
     <div id="time">{{ playlist.quantity }}</div>
   </router-link>
 </template>
@@ -26,6 +26,7 @@ export default {
     return {
       artist: "",
       img: "http://localhost:8080/image/" + this.playlist.image.name,
+      to: "/playlist" + "?id=" + this.playlist.id
     }
   }
 }
