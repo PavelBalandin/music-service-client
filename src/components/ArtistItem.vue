@@ -1,37 +1,36 @@
 <template>
-  <router-link v-bind:to=to class="music">
+  <router-link v-bind:to=to class="artist">
     <div id="index">{{ index }}</div>
     <div id="info">
-      <img v-bind:src=img alt="">
-      <div id="title_artist">
-        <div id="title">{{ playlist.name }}</div>
+      <img v-bind:src=image alt="image">
+      <div id="title">
+        <div id="title_name">{{ artist.name }}</div>
       </div>
     </div>
     <a id="album" href=""></a>
-    <div id="date">{{ playlist.created }}</div>
-    <div id="time">{{ playlist.quantity }}</div>
+    <div id="date">{{ artist.created }}</div>
+    <div id="time">{{ artist.quantity }}</div>
   </router-link>
 </template>
 
 <script>
 export default {
-  name: "PlaylistItem",
+  name: "ArtistItem",
   props: {
     index: Number,
-    playlist: Object
+    artist: Object
   },
   data() {
     return {
-      img: "http://localhost:8080/image/" + this.playlist.image.name,
-      to: "/playlist" + "?id=" + this.playlist.id
+      image: "http://localhost:8080/image/" + this.artist.image.name,
+      to: "/artist" + "?id=" + this.artist.id
     }
   }
 }
 </script>
 
 <style scoped>
-
-.music {
+.artist {
   display: flex;
   flex-direction: row;
   font-size: 16px;
@@ -50,24 +49,24 @@ export default {
   object-position: 0 0;
 }
 
+#info {
+  display: flex;
+  width: 40%;
+}
+
 #index {
   width: 3%;
   display: flex;
   justify-content: center;
 }
 
-#info {
-  display: flex;
-  width: 40%;
-}
-
-#title_artist {
+#title {
   padding: 0 0 0 16px;
   display: flex;
   align-items: center;
 }
 
-#title {
+#title_name {
   color: #1d1d1d;
 }
 
@@ -93,14 +92,13 @@ export default {
   justify-content: center;
 }
 
-.music:hover {
+.artist:hover {
   transition: 0.3s;
   background-color: #dbdbdb;
 }
 
-.music:not(:hover) {
+.artist:not(:hover) {
   transition: 0.3s;
 }
-
 
 </style>
