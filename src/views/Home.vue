@@ -28,5 +28,7 @@ export default {
 </script>
 
 <style scoped>
-
+.musicList {
+  height: calc(100vh - 196px);
+}
 </style>

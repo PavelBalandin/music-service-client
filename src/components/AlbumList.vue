@@ -1,26 +1,25 @@
 <template>
-  <div class="musicList">
-    <MusicItem
-        v-for="(music, i) in musicList"
-        v-bind:music="music"
+  <div class="playlistList">
+    <AlbumItem
+        v-for="(album, i) in albums"
+        v-bind:album="album"
         v-bind:index="i+1"
     />
   </div>
 </template>
 
 <script>
-import MusicItem from "./MusicItem";
+import AlbumItem from "./AlbumItem";
 
 export default {
-  name: "MusicList",
-  props: ['musicList'],
-  components: {MusicItem},
+  name: "AlbumList",
+  props: ['albums'],
+  components: {AlbumItem}
 }
 </script>
 
 <style scoped>
-.musicList {
-  /*height: calc(100vh - 196px);*/
+.playlistList {
   height: calc(100vh - 436px);
   margin: 16px 0;
   padding: 0 32px;

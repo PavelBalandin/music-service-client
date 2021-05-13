@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="about_artist">
+    <div class="about_album">
       <img v-bind:src=image alt="image">
-      <div class="artist_info">
-        <p><b>{{ artist.name }}</b></p>
+      <div class="album_info">
+        <p><b>{{ album.name }}</b></p>
         <p class="description">Nirvana was an American rock band formed in Aberdeen, Washington in 1987. Founded by lead
           singer and
           guitarist Kurt Cobain and bassist Krist Novoselic, the band went through a succession of drummers before
@@ -15,64 +15,62 @@
         </p>
       </div>
     </div>
-    <AlbumList v-bind:albums="albums"/>
+    <MusicList v-bind:musicList="musicList"/>
   </div>
 </template>
 
 <script>
 import MusicList from "../../components/MusicList";
 import axios from "axios";
-import AlbumList from "../../components/AlbumList";
 
 export default {
-  name: "Artist",
-  components: {AlbumList, MusicList},
+  name: "Album",
+  components: {MusicList},
   data() {
     return {
-      artist: Object,
+      album: Object,
       image: "",
-      albums: []
+      musicList: []
     }
   },
   async mounted() {
-    const result = await axios.get('http://localhost:8080/api/v1/artists/' + this.$route.query.id, {
+    const result = await axios.get('http://localhost:8080/api/v1/albums/' + this.$route.query.id, {
       headers: {
         Authorization: 'Bearer_' + localStorage.getItem('token')
       }
     });
-    this.artist = result.data;
-    this.image = "http://localhost:8080/image/" + this.artist.image.name;
+    this.album = result.data;
+    this.image = "http://localhost:8080/image/" + this.album.image.name;
 
-    const res = await axios.get('http://localhost:8080/api/v1/albums/artist/' + this.$route.query.id, {
+    const res = await axios.get('http://localhost:8080/api/v1/compositions/album/' + this.$route.query.id, {
       headers: {
         Authorization: 'Bearer_' + localStorage.getItem('token')
       }
     });
-    this.albums = res.data;
+    this.musicList = res.data;
   },
 }
 </script>
 
 <style scoped>
-.about_artist {
+.about_album {
   padding: 20px;
   display: flex;
   flex-direction: row;
 }
 
-.about_artist img {
+.about_album img {
   width: 200px;
   height: 200px;
   object-fit: cover;
   object-position: 0 0;
 }
 
-.artist_info {
+.album_info {
   padding-left: 20px;
 }
 
 .description {
   text-align: justify;
 }
-
 </style>

@@ -20,7 +20,6 @@ export default {
         Authorization: 'Bearer_' + localStorage.getItem('token')
       }
     });
-    console.log(res.data);
     this.playlists = res.data;
   },
 }

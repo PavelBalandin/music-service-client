@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .artistList {
-  height: calc(100vh - 196px);
+  height: calc(100vh - 436px);
   margin: 16px 0;
   padding: 0 32px;
   overflow-y: scroll;

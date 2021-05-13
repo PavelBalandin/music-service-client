@@ -1,52 +1,31 @@
 <template>
-  <div class="music">
-    <div v-on:click="play_pause" id="index">{{ index }}</div>
+  <router-link v-bind:to=to class="music">
+    <div id="index">{{ index }}</div>
     <div id="info">
       <img v-bind:src=img alt="">
       <div id="title_artist">
-        <div id="title">{{ music.name }}</div>
-        <router-link v-for="artist in music.artists" id="artist" v-bind:to=artist_path(artist.id)>
-          {{ artist.name }}
-        </router-link>
+        <div id="title">{{ album.name }}</div>
       </div>
     </div>
-    <router-link id="album" v-bind:to=album_path(music.album.id)>{{ music.album.name }}</router-link>
-    <div id="date">{{ music.created_at }}</div>
-    <div id="time">----</div>
-  </div>
+    <a id="album" href=""></a>
+    <div id="date">{{ album.created }}</div>
+    <div id="time">{{ album.quantity }}</div>
+  </router-link>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  name: "MusicItem",
+  name: "AlbumItem",
   props: {
     index: Number,
-    music: {
-      type: Object
-    }
+    album: Object
   },
   data() {
     return {
-      artist: "",
-      img: "http://localhost:8080/image/" + this.music.image.name,
+      img: "http://localhost:8080/image/" + this.album.image.name,
+      to: "/album" + "?id=" + this.album.id
     }
-  },
-  methods: {
-    play_pause() {
-      audio_player.start(this.music);
-      this.$state = audio_player.state
-    },
-    artist_path(id) {
-      return "/artist?id=" + id
-    },
-    album_path(id) {
-      return "/album?id=" + id
-    }
-  },
-
-
+  }
 }
 </script>
 
@@ -84,17 +63,8 @@ export default {
 
 #title_artist {
   padding: 0 0 0 16px;
-}
-
-#artist {
-  font-size: 14px;
-  color: #a0a0a0;
-  margin-right: 12px;
-}
-
-#artist:hover {
-  transition: 0.3s;
-  text-decoration: underline;
+  display: flex;
+  align-items: center;
 }
 
 #title {
@@ -131,6 +101,5 @@ export default {
 .music:not(:hover) {
   transition: 0.3s;
 }
-
 
 </style>

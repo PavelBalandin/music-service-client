@@ -56,7 +56,7 @@ const routes = [
         path: '/album',
         name: 'album',
         meta: {layout: 'main'},
-        component: () => import('../views/Album.vue')
+        component: () => import('../views/single/Album.vue')
     },
     {
         path: '/artist',
