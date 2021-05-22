@@ -11,9 +11,13 @@
       </div>
     </div>
     <router-link id="album" v-bind:to=album_path(music.album.id)>{{ music.album.name }}</router-link>
-    <div id="date">add to playlist</div>
-    <div id="time">
-      <a :href="audio" @click.prevent="download">Download</a>
+    <div id="date"></div>
+    <div id="time" class="dropdown">
+      <div class="drop-btn">...</div>
+      <div class="drop-content">
+        <a :href="audio" @click.prevent="download">Download</a>
+        <a href="#">Add to playlist</a>
+      </div>
     </div>
   </div>
 </template>
@@ -146,5 +150,42 @@ export default {
   transition: 0.3s;
 }
 
+
+/*Drop down content*/
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.drop-content {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  border-radius: 2px;
+  background-color: #f1f1f1;
+  padding: 5px;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.drop-content a {
+  color: #1d1d1d;
+  font-size: 14px;
+  padding: 10px 10px;
+  border-radius: 2px;
+  text-decoration: none;
+  display: block;
+}
+
+.drop-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .drop-content {
+  display: block;
+}
 
 </style>
