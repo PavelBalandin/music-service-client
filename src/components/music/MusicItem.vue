@@ -19,7 +19,10 @@
           }}</a>
       </div>
     </div>
-    <div id="time">
+    <div v-bind:class="{delete_hidden: !currentPlaylist}" class="delete">
+      <img v-on:click="delete_composition(currentPlaylist, music.id)" src="@/assets/image/cross3.png" alt="">
+    </div>
+    <div class="time">
       <a :href="audio" @click.prevent="download">Download</a>
     </div>
   </div>
@@ -28,6 +31,7 @@
 <script>
 import axios from "axios";
 import messages from "../../utils/messages";
+import router from "@/router";
 
 export default {
   name: "MusicItem",
@@ -36,6 +40,7 @@ export default {
     music: {
       type: Object
     },
+    currentPlaylist: String
   },
   data() {
     return {
@@ -76,16 +81,30 @@ export default {
       } else {
         this.$error(messages['compositionAddError']);
       }
+    },
+    async delete_composition(playlistId, compositionId) {
+      const result = await axios.get("http://localhost:8080/api/v1/playlists/delete-composition/" + playlistId + "/" + compositionId,
+          {headers: {Authorization: 'Bearer_' + localStorage.getItem('token')}});
+      if (result.status === 200) {
+        this.$message('Composition is removed');
+        this.$emit('delete-composition', 'delete')
+      } else {
+        this.$error('Composition isn\' present');
+      }
+
     }
   },
+
   async mounted() {
+    console.log(this.currentPlaylist)
     const res = await axios.get('http://localhost:8080/api/v1/playlists/user/' + localStorage.getItem("id"), {
       headers: {
         Authorization: 'Bearer_' + localStorage.getItem('token')
       }
     });
     this.playlists = res.data;
-  },
+  }
+  ,
 
 }
 </script>
@@ -154,10 +173,34 @@ export default {
 
 #date {
   display: flex;
-  width: 20%;
+  width: 15%;
 }
 
-#time {
+.delete {
+  display: flex;
+  width: 5%;
+}
+
+.delete img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+}
+
+.delete img:active {
+  padding-top: 3px;
+}
+
+.delete img:hover {
+  opacity: 1;
+}
+
+.delete_hidden {
+  display: none;
+}
+
+
+.time {
   width: 7%;
   display: flex;
   justify-content: center;
@@ -207,6 +250,9 @@ export default {
 
 .dropdown:hover .drop-content {
   display: block;
+}
+.drop-btn{
+  font-size: 20px;
 }
 
 </style>

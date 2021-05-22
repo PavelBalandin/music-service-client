@@ -4,6 +4,8 @@
         v-for="(music, i) in musicList"
         v-bind:music="music"
         v-bind:index="i+1"
+        v-bind:currentPlaylist="currentPlaylist"
+        @delete-composition="deleteComposition"
     />
   </div>
 </template>
@@ -13,8 +15,13 @@ import MusicItem from "./MusicItem";
 
 export default {
   name: "MusicList",
-  props: ['musicList'],
+  props: ['musicList', 'currentPlaylist'],
   components: {MusicItem},
+  methods:{
+    deleteComposition(){
+      this.$emit('delete-composition', 'delete')
+    }
+  }
 }
 </script>
 
