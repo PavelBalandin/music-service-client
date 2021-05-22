@@ -5,16 +5,20 @@
         v-bind:playlist="playlist"
         v-bind:index="i+1"
     />
+    <AddPlaylist/>
+    <EditPlaylist/>
   </div>
 </template>
 
 <script>
 import PlaylistItem from "./PlaylistItem";
+import AddPlaylist from "./AddPlaylist";
+import EditPlaylist from "./EditPlaylist";
 
 export default {
   name: "PlaylistList",
   props: ['playlists'],
-  components: {PlaylistItem}
+  components: {EditPlaylist, AddPlaylist, PlaylistItem}
 }
 </script>
 
