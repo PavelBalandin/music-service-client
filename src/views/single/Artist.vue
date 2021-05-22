@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import MusicList from "../../components/MusicList";
+import MusicList from "../../components/music/MusicList";
 import axios from "axios";
-import AlbumList from "../../components/AlbumList";
+import AlbumList from "../../components/album/AlbumList";
 
 export default {
   name: "Artist",

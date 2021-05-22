@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ArtistList from "../components/ArtistList";
+import ArtistList from "../components/artist/ArtistList";
 import axios from "axios";
 
 export default {

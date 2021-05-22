@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import MusicList from "../../components/MusicList";
+import MusicList from "../../components/music/MusicList";
 import axios from "axios";
 
 export default {

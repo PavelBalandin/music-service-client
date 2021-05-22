@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import PlaylistList from "../components/PlaylistList";
+import PlaylistList from "../components/playlist/PlaylistList";
 import axios from "axios";
 
 export default {
