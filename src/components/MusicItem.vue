@@ -11,8 +11,10 @@
       </div>
     </div>
     <router-link id="album" v-bind:to=album_path(music.album.id)>{{ music.album.name }}</router-link>
-    <div id="date">{{ music.created_at }}</div>
-    <div id="time">----</div>
+    <div id="date">add to playlist</div>
+    <div id="time">
+      <a :href="audio" @click.prevent="download">Download</a>
+    </div>
   </div>
 </template>
 
@@ -31,6 +33,7 @@ export default {
     return {
       artist: "",
       img: "http://localhost:8080/image/" + this.music.image.name,
+      audio: "http://localhost:8080/audio/" + this.music.audio,
     }
   },
   methods: {
@@ -43,6 +46,17 @@ export default {
     },
     album_path(id) {
       return "/album?id=" + id
+    },
+    download() {
+      axios.get(this.audio, {responseType: 'blob'})
+          .then(response => {
+            const blob = new Blob([response.data], {type: 'application/media'})
+            const link = document.createElement('a')
+            link.href = URL.createObjectURL(blob)
+            link.download = this.music.audio
+            link.click()
+            URL.revokeObjectURL(link.href)
+          }).catch(console.error)
     }
   },
 
