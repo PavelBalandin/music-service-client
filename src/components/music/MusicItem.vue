@@ -27,6 +27,7 @@
 
 <script>
 import axios from "axios";
+import messages from "../../utils/messages";
 
 export default {
   name: "MusicItem",
@@ -70,6 +71,11 @@ export default {
     async add_composition(playlistId, compositionId) {
       const result = await axios.get("http://localhost:8080/api/v1/playlists/add-composition/" + playlistId + "/" + compositionId,
           {headers: {Authorization: 'Bearer_' + localStorage.getItem('token')}});
+      if (result.status === 200) {
+        this.$message('Added to playlist');
+      } else {
+        this.$error(messages['compositionAddError']);
+      }
     }
   },
   async mounted() {
@@ -195,6 +201,7 @@ export default {
 }
 
 .drop-content a:hover {
+  cursor: pointer;
   background-color: #ddd;
 }
 
