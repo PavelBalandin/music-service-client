@@ -11,13 +11,16 @@
       </div>
     </div>
     <router-link id="album" v-bind:to=album_path(music.album.id)>{{ music.album.name }}</router-link>
-    <div id="date"></div>
-    <div id="time" class="dropdown">
+    <div id="date" class="dropdown">
       <div class="drop-btn">...</div>
       <div class="drop-content">
-        <a :href="audio" @click.prevent="download">Download</a>
-        <a href="#">Add to playlist</a>
+        <a v-on:click="add_composition(playlist.id, music.id)" v-for="(playlist, i) in playlists">{{
+            playlist.name
+          }}</a>
       </div>
+    </div>
+    <div id="time">
+      <a :href="audio" @click.prevent="download">Download</a>
     </div>
   </div>
 </template>
@@ -31,13 +34,14 @@ export default {
     index: Number,
     music: {
       type: Object
-    }
+    },
   },
   data() {
     return {
       artist: "",
       img: "http://localhost:8080/image/" + this.music.image.name,
       audio: "http://localhost:8080/audio/" + this.music.audio,
+      playlists: []
     }
   },
   methods: {
@@ -61,9 +65,21 @@ export default {
             link.click()
             URL.revokeObjectURL(link.href)
           }).catch(console.error)
+    },
+
+    async add_composition(playlistId, compositionId) {
+      const result = await axios.get("http://localhost:8080/api/v1/playlists/add-composition/" + playlistId + "/" + compositionId,
+          {headers: {Authorization: 'Bearer_' + localStorage.getItem('token')}});
     }
   },
-
+  async mounted() {
+    const res = await axios.get('http://localhost:8080/api/v1/playlists/user/' + localStorage.getItem("id"), {
+      headers: {
+        Authorization: 'Bearer_' + localStorage.getItem('token')
+      }
+    });
+    this.playlists = res.data;
+  },
 
 }
 </script>
@@ -161,8 +177,6 @@ export default {
 .drop-content {
   display: none;
   position: absolute;
-  top: 10px;
-  right: 20px;
   border-radius: 2px;
   background-color: #f1f1f1;
   padding: 5px;
