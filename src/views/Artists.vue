@@ -18,7 +18,6 @@ export default {
         Authorization: 'Bearer_' + localStorage.getItem('token')
       }
     });
-    console.log(res.data);
     this.artists = res.data;
   },
 }

@@ -1,14 +1,15 @@
 <template>
   <div class="addplaylist">
-    <form action="">
+    <form @submit.prevent="add">
       <input v-model="name" type="text">
-      <button v-on:click="add" class="waves-effect waves-light btn-small" type="submit">Add</button>
+      <button class="waves-effect waves-light btn-small" type="submit">Add</button>
     </form>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import messages from "../../utils/messages";
 
 export default {
   name: "AddPlaylist",
@@ -26,8 +27,14 @@ export default {
             "image": {"id": 5},
           },
           {headers: {Authorization: 'Bearer_' + localStorage.getItem('token')}});
-      console.log(result.data)
+      if (result.status === 201) {
+        this.$emit('update-playlist', 'delete')
+        this.$message('Playlist is created');
+      } else {
+        this.$error(messages['Playlist isn\'t created']);
+      }
     }
+
   }
 }
 </script>

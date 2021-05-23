@@ -96,7 +96,6 @@ export default {
   },
 
   async mounted() {
-    console.log(this.currentPlaylist)
     const res = await axios.get('http://localhost:8080/api/v1/playlists/user/' + localStorage.getItem("id"), {
       headers: {
         Authorization: 'Bearer_' + localStorage.getItem('token')

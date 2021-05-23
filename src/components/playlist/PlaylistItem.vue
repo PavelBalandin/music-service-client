@@ -1,19 +1,23 @@
 <template>
-  <router-link v-bind:to=to class="music">
+  <div v-bind:to=to class="music">
     <div id="index">{{ index }}</div>
-    <div id="info">
+    <router-link v-bind:to=to id="info">
       <img v-bind:src=img alt="">
       <div id="title_artist">
         <div id="title">{{ playlist.name }}</div>
       </div>
+    </router-link>
+    <a id="album" href="">{{ playlist.created }}</a>
+    <div class="delete">
+      <img v-on:click="delete_playlist" src="@/assets/image/cross3.png" alt="">
     </div>
-    <a id="album" href=""></a>
-    <div id="date">{{ playlist.created }}</div>
     <div id="time">{{ playlist.quantity }}</div>
-  </router-link>
+  </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "PlaylistItem",
   props: {
@@ -24,6 +28,18 @@ export default {
     return {
       img: "http://localhost:8080/image/" + this.playlist.image.name,
       to: "/playlist" + "?id=" + this.playlist.id
+    }
+  },
+  methods: {
+    async delete_playlist() {
+      const result = await axios.delete("http://localhost:8080/api/v1/playlists/" + this.playlist.id,
+          {headers: {Authorization: 'Bearer_' + localStorage.getItem('token')}});
+      if (result.status === 204) {
+        this.$message('Playlist is removed');
+        this.$emit('delete-playlist', 'delete')
+      } else {
+        this.$error('Playlist isn\' present');
+      }
     }
   }
 }
@@ -82,7 +98,7 @@ export default {
   text-decoration: underline;
 }
 
-#date {
+.delete {
   display: flex;
   width: 20%;
 }
@@ -100,6 +116,20 @@ export default {
 
 .music:not(:hover) {
   transition: 0.3s;
+}
+
+.delete img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+}
+
+.delete img:active {
+  padding-top: 3px;
+}
+
+.delete img:hover {
+  opacity: 1;
 }
 
 

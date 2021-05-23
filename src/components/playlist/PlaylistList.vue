@@ -4,8 +4,11 @@
         v-for="(playlist, i) in playlists"
         v-bind:playlist="playlist"
         v-bind:index="i+1"
+        @delete-playlist="deletePlaylist"
     />
-    <AddPlaylist/>
+    <AddPlaylist
+        @update-playlist="deletePlaylist"
+    />
   </div>
 </template>
 
@@ -16,7 +19,12 @@ import AddPlaylist from "./AddPlaylist";
 export default {
   name: "PlaylistList",
   props: ['playlists'],
-  components: {AddPlaylist, PlaylistItem}
+  components: {AddPlaylist, PlaylistItem},
+  methods: {
+    deletePlaylist() {
+      this.$emit('delete-playlist', 'delete')
+    }
+  }
 }
 </script>
 

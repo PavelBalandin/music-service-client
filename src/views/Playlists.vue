@@ -1,5 +1,8 @@
 <template>
-  <PlaylistList v-bind:playlists="playlists"/>
+  <PlaylistList
+      v-bind:playlists="playlists"
+      @delete-playlist="deletePlaylist"
+  />
 </template>
 
 <script>
@@ -12,6 +15,16 @@ export default {
   data() {
     return {
       playlists: []
+    }
+  },
+  methods: {
+    async deletePlaylist() {
+      const res = await axios.get('http://localhost:8080/api/v1/playlists/user/' + localStorage.getItem("id"), {
+        headers: {
+          Authorization: 'Bearer_' + localStorage.getItem('token')
+        }
+      });
+      this.playlists = res.data;
     }
   },
   async mounted() {
