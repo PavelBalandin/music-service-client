@@ -251,7 +251,8 @@ export default {
 .dropdown:hover .drop-content {
   display: block;
 }
-.drop-btn{
+
+.drop-btn {
   font-size: 20px;
 }
 
