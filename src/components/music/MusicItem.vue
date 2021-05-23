@@ -1,6 +1,7 @@
 <template>
   <div class="music">
-    <div v-on:click="play_pause" id="index">{{ index }}</div>
+    <div v-on:click="play_pause" id="index"><div class="index_number">{{ index }}</div><img class="index_image" src="@/assets/image/playm-black.png" alt="">
+    </div>
     <div id="info">
       <img v-bind:src=img alt="">
       <div id="title_artist">
@@ -135,6 +136,12 @@ export default {
   justify-content: center;
 }
 
+.index_image {
+  opacity: 0.75;
+  display: none;
+
+}
+
 #info {
   display: flex;
   width: 40%;
@@ -213,6 +220,14 @@ export default {
 
 .music:not(:hover) {
   transition: 0.3s;
+}
+
+.music:hover .index_image {
+  display: block;
+}
+
+.music:hover .index_number {
+  display: none;
 }
 
 

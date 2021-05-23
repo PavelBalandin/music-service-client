@@ -59,6 +59,7 @@ export default {
       if (result.status === 201) {
         this.$emit('update-playlist', 'delete')
         this.$message('Playlist is created');
+        this.name = ''
       } else {
         this.$error(messages['Playlist isn\'t created']);
       }
@@ -80,7 +81,8 @@ export default {
 .addplaylist form button {
   margin: 0 30px;
 }
-.input-field{
+
+.input-field {
   width: 100%;
 }
 </style>

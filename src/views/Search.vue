@@ -1,10 +1,7 @@
 <template>
   <div>
     <div class="search">
-      <input v-on:change="find" v-model="input" type="text">
-      <div class="img_c">
-        <img v-on:click="find" src="@/assets/image/search.png" alt="">
-      </div>
+      <input v-on:change="find" v-model="input" type="text" placeholder="Just start typing">
     </div>
 
     <MusicList v-bind:musicList="musicList"/>
@@ -26,7 +23,10 @@ export default {
   },
   methods: {
     async find() {
-      if (this.input === "") return;
+      if (this.input === "") {
+        this.musicList = [];
+        return;
+      }
       const result = await axios.get('http://localhost:8080/api/v1/compositions/search/' + this.input, {
         headers: {
           Authorization: 'Bearer_' + localStorage.getItem('token')
@@ -51,11 +51,7 @@ export default {
   padding: 10px;
   display: flex;
   flex-direction: row;
-  width: 40%;
+  width: 100%;
 }
 
-.img_c {
-  display: flex;
-  align-items: center;
-}
 </style>

@@ -139,7 +139,12 @@ export default {
 
 <style scoped>
 .music-player {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   position: absolute;
+  padding: 0 2%;
   bottom: 0;
   left: 0;
   height: 100px !important;
@@ -149,12 +154,8 @@ export default {
   color: #fff;
 }
 
-.music-player {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2%;
+.music-info {
+  width: 20%;
 }
 
 .music-controls {
@@ -200,6 +201,7 @@ export default {
 
 .music-controls-audio {
   display: flex;
+  width: 20%;
   flex-direction: row;
   align-items: center;
 }
