@@ -191,6 +191,7 @@ export default {
 }
 
 .delete img:hover {
+  cursor: pointer;
   opacity: 1;
 }
 

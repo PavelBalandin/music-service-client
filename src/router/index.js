@@ -83,8 +83,6 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     const requiredAuth = to.matched.some(record => record.meta.auth)
     check().then((data) => {
-        console.log(requiredAuth)
-        console.log(data)
         if (requiredAuth && data) {
             next('/login')
         } else {
@@ -101,7 +99,6 @@ async function check() {
         const result = await axios.get('http://localhost:8080/api/v1/tags', {
             headers: {Authorization: 'Bearer_' + localStorage.getItem('token')}
         });
-        console.log(result.status)
         if (result.status === 200) {
             return false;
         } else {

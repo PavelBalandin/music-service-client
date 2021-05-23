@@ -94,8 +94,8 @@ export default {
 }
 
 #album:hover {
-  transition: 0.3s;
-  text-decoration: underline;
+  /*transition: 0.3s;*/
+  /*text-decoration: underline;*/
 }
 
 .delete {
@@ -129,6 +129,7 @@ export default {
 }
 
 .delete img:hover {
+  cursor: pointer;
   opacity: 1;
 }
 
