@@ -1,6 +1,8 @@
 <template>
   <div class="music">
-    <div v-on:click="play_pause" id="index"><div class="index_number">{{ index }}</div><img class="index_image" src="@/assets/image/playm-black.png" alt="">
+    <div v-on:click="play_pause" id="index">
+      <div class="index_number">{{ index }}</div>
+      <img class="index_image" src="@/assets/image/playm-black.png" alt="">
     </div>
     <div id="info">
       <img v-bind:src=img alt="">
@@ -38,9 +40,7 @@ export default {
   name: "MusicItem",
   props: {
     index: Number,
-    music: {
-      type: Object
-    },
+    music: {type: Object},
     currentPlaylist: String
   },
   data() {
@@ -48,9 +48,17 @@ export default {
       artist: "",
       img: "http://localhost:8080/image/" + this.music.image.name,
       audio: "http://localhost:8080/audio/" + this.music.audio,
-      playlists: []
+      playlists: [],
+      cacheKey: new Date(),
     }
   },
+
+  watch: {
+    img() {
+      this.$forceUpdate()
+    }
+  },
+
   methods: {
     play_pause() {
       audio_player.start(this.music);
@@ -95,7 +103,6 @@ export default {
 
     }
   },
-
   async mounted() {
     const res = await axios.get('http://localhost:8080/api/v1/playlists/user/' + localStorage.getItem("id"), {
       headers: {
