@@ -18,7 +18,7 @@
         <small
             class="helper-text invalid"
             v-else-if="$v.username.$dirty && !$v.username.minLength"
-        >Your username must be 6 characters or more. Now is {{ username.length }}</small>
+        >Your username must be 2 characters or more. Now is {{ username.length }}</small>
         <small
             class="helper-text invalid"
             v-else-if="$v.username.$dirty && !$v.username.maxLength"
@@ -82,7 +82,7 @@ export default {
     }
   },
   validations: () => ({
-    username: {required, minLength: minLength(6), maxLength: maxLength(20)},
+    username: {required, minLength: minLength(2), maxLength: maxLength(20)},
     password: {required, minLength: minLength(6), maxLength: maxLength(20)}
   }),
   methods: {
