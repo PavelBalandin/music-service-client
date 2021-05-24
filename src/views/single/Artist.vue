@@ -4,15 +4,7 @@
       <img v-bind:src=image alt="image">
       <div class="artist_info">
         <p><b>{{ artist.name }}</b></p>
-        <p class="description">Nirvana was an American rock band formed in Aberdeen, Washington in 1987. Founded by lead
-          singer and
-          guitarist Kurt Cobain and bassist Krist Novoselic, the band went through a succession of drummers before
-          recruiting Dave Grohl in 1990. Nirvana's success popularized alternative rock, and they were often referenced
-          as
-          the figurehead band of Generation X. Their music maintains a popular following and continues to influence
-          modern
-          rock and roll culture.
-        </p>
+        <p class="description">{{artist.description}}</p>
       </div>
     </div>
     <AlbumList v-bind:albums="albums"/>

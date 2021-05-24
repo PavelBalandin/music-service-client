@@ -113,6 +113,11 @@ export default {
   watch: {
     volume() {
       this.volume_update()
+    },
+    seek() {
+      if (this.seek >= this.max_seek) {
+        this.next()
+      }
     }
   },
   mounted() {
